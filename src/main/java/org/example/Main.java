@@ -1,27 +1,31 @@
 package org.example;
 
 import org.example.Controller.ProductController;
-import org.example.Database.ConfigDB;
 
 import javax.swing.*;
-import java.sql.Connection;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        String option = "";
+        String option;
 
         do {
-            option = JOptionPane.showInputDialog("""
+            // ✅ Mostrar el menú completo
+            option = JOptionPane.showInputDialog(
+                    null,
+                    """
+                    Seleccione una opción:
                     
-                    1.Agregar Producto.
-                    2.Obtener todos los productos.
-                    3.Modificar producto.
-                    4.Borrar producto.
-                    5.Salir.
-                    """);
-            // Si el usuario presiona Cancelar o cierra el diálogo
+                    1. Agregar Producto
+                    2. Obtener todos los productos
+                    3. Modificar producto
+                    4. Borrar producto
+                    5. Salir
+                    """,
+                    "Menú Principal",
+                    JOptionPane.QUESTION_MESSAGE
+            );
+
+            // ✅ Si el usuario presionó Cancelar o cerró la ventana
             if (option == null) {
                 int confirm = JOptionPane.showConfirmDialog(
                         null,
@@ -32,14 +36,15 @@ public class Main {
                 );
 
                 if (confirm == JOptionPane.YES_OPTION) {
-                    break; // Salir del programa
+                    JOptionPane.showMessageDialog(null, "Saliendo del programa...");
+                    break; // salir del bucle → termina el programa
                 } else {
-                    continue; // Volver a mostrar el menú
+                    continue; // volver a mostrar el menú
                 }
             }
 
-
-            switch (option){
+            // ✅ Validar la opción ingresada
+            switch (option) {
                 case "1":
                     ProductController.create();
                     break;
@@ -53,11 +58,13 @@ public class Main {
                     ProductController.delete();
                     break;
                 case "5":
+                    JOptionPane.showMessageDialog(null, "Saliendo del programa...");
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null,"Opcion invalida");
+                    JOptionPane.showMessageDialog(null, "Opción inválida, intenta de nuevo.");
                     break;
             }
-        }while (!option.equals("5"));
+
+        } while (!"5".equals(option)); // ✅ condición segura (no se rompe si option es null)
     }
 }

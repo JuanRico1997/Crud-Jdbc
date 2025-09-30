@@ -52,6 +52,7 @@ public class InputValidation {
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Debe ingresar un número entero válido");
             }
+
         }
     }
 
@@ -59,10 +60,6 @@ public class InputValidation {
         while (true) {
             String entrada = JOptionPane.showInputDialog(null, mensaje);
 
-            if (entrada == null) {
-                JOptionPane.showMessageDialog(null, "Operación cancelada");
-                return null;
-            }
 
             entrada = entrada.trim();
 
@@ -80,6 +77,7 @@ public class InputValidation {
                 return numero;
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Debe ingresar un número decimal válido");
+
             }
         }
     }
